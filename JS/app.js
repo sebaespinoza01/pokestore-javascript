@@ -1,3 +1,7 @@
+let nombreEntrenador = prompt("¡Bienvenido, entrenador Pokémon! ¿Cuál es tu nombre?");
+alert("¡Hola, " + nombreEntrenador + "! Prepárate para comenzar tu aventura Pokémon.");
+
+
 const clickButtons = document.querySelectorAll('.button');
 const tbody = document.querySelector('.tbody');
 let carrito = [];
