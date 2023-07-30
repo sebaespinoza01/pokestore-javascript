@@ -1,10 +1,88 @@
-let nombreEntrenador = prompt("¡Bienvenido, entrenador Pokémon! ¿Cuál es tu nombre?");
-alert("¡Hola, " + nombreEntrenador + "! Prepárate para comenzar tu aventura Pokémon.");
-
-
 const clickButtons = document.querySelectorAll('.button');
 const tbody = document.querySelector('.tbody');
 let carrito = [];
+
+// Archivo JSON con los datos de los productos
+const productosJSON = [
+{
+    "title": "Pikachu",
+    "precio": "$ 5.000",
+    "img": "./img/pikachu.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Jigglypuff",
+    "precio": "$ 5.000",
+    "img": "./img/p2.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Charizard",
+    "precio": "$ 5.000",
+    "img": "./img/p3.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Dragonite",
+    "precio": "$ 5.000",
+    "img": "./img/p4.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Bulbasaur",
+    "precio": "$ 5.000",
+    "img": "./img/p5.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Machamp",
+    "precio": "$ 5.000",
+    "img": "./img/p6.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Gengar",
+    "precio": "$ 5.000",
+    "img": "./img/p7.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Syther",
+    "precio": "$ 5.000",
+    "img": "./img/p8.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Suicune",
+    "precio": "$ 5.000",
+    "img": "./img/p9.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Zapdos",
+    "precio": "$ 5.000",
+    "img": "./img/p10.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Mew",
+    "precio": "$ 5.000",
+    "img": "./img/p11.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Gyarados",
+    "precio": "$ 5.000",
+    "img": "./img/p12.jpg",
+    "cantidad": 1
+},
+{
+    "title": "Gyarados Red",
+    "precio": "$ 5.000",
+    "img": "./img/p13.jpg",
+    "cantidad": 1
+}
+];
 
 clickButtons.forEach(btn => {
     btn.addEventListener('click', addToCarritoItem);
@@ -28,15 +106,13 @@ function addToCarritoItem(e) {
 }
 
 function addItemCarrito(newItem) {
+    const alert = document.querySelector('.alert');
 
-    const alert = document.querySelector('.alert')
+    setTimeout(function () {
+        alert.classList.add('hide');
+    }, 2000);
 
-    setTimeout( function(){
-        alert.classList.add('hide')
-    }, 2000)
-    alert.classList.remove('hide')
-
-
+    alert.classList.remove('hide');
 
     const inputElementos = tbody.getElementsByClassName('input__elemento');
     for (let i = 0; i < carrito.length; i++) {
@@ -44,7 +120,7 @@ function addItemCarrito(newItem) {
             carrito[i].cantidad++;
             const inputValue = inputElementos[i];
             inputValue.value++;
-            carritoTotal()
+            carritoTotal();
             return null;
         }
     }
@@ -71,67 +147,81 @@ function renderCarrito() {
             </td>
         `;
         tr.innerHTML = content;
-        tbody.append(tr)
+        tbody.append(tr);
 
-        tr.querySelector(".delete").addEventListener('click', removeItemCarrito)
-        tr.querySelector(".input__elemento").addEventListener('change', sumaCantidad)
+        tr.querySelector(".delete").addEventListener('click', removeItemCarrito);
+        tr.querySelector(".input__elemento").addEventListener('change', sumaCantidad);
     });
-    carritoTotal()
+    carritoTotal();
 }
 
-function carritoTotal(){
+function carritoTotal() {
     let total = 0;
     const itemCartTotal = document.querySelector('.itemCartTotal');
     carrito.forEach(item => {
         const precio = Number(item.precio.replace("$", ''));
-        total = total + precio*item.cantidad;
-    })
+        total = total + precio * item.cantidad;
+    });
     itemCartTotal.innerHTML = `Total $${total}`;
-    addLocalStorage()
+    addLocalStorage();
 }
 
-function removeItemCarrito(e){
-    const buttonDelete = e.target
-    const tr = buttonDelete.closest(".ItemCarrito")
+function removeItemCarrito(e) {
+    const buttonDelete = e.target;
+    const tr = buttonDelete.closest(".ItemCarrito");
     const title = tr.querySelector('.title').textContent;
-    for(let i=0; i<carrito.length ; i++){
-        if(carrito[i].title.trim() === title.trim()){
-            carrito.splice(i, 1)
+
+    for (let i = 0; i < carrito.length; i++) {
+        if (carrito[i].title.trim() === title.trim()) {
+            carrito.splice(i, 1);
+            break; // Añadimos el break para salir del loop una vez eliminado el elemento.
         }
     }
 
-    const alert = document.querySelector('.remove')
+    const alert = document.querySelector('.remove');
 
-    setTimeout( function(){
-        alert.classList.add('remove')
-    }, 2000)
-    alert.classList.remove('remove')
+    setTimeout(function () {
+        alert.classList.add('remove');
+    }, 2000);
 
-    tr.remove()
-    carritoTotal()
+    alert.classList.remove('remove');
+
+    tr.remove();
+
+    if (carrito.length === 0) {
+        document.getElementById('btnComprar').disabled = true;
+        // Mostrar Sweet Alert cuando el carrito está vacío
+        swal("Tu Pokemon a escapado", "oh oh! algo extraño a ocurrido, puedes volver a los productos para seguir agregando", "info");
+    }
+
+    carritoTotal();
 }
 
-function sumaCantidad(e){
-    const sumaInput = e.target
-    const tr = sumaInput.closest(".ItemCarrito")
+function sumaCantidad(e) {
+    const sumaInput = e.target;
+    const tr = sumaInput.closest(".ItemCarrito");
     const title = tr.querySelector('.title').textContent;
     carrito.forEach(item => {
-        if(item.title.trim() === title){
+        if (item.title.trim() === title) {
             sumaInput.value < 1 ? (simaInput.value = 1) : sumaInput.value;
             item.cantidad = sumaInput.value;
-            carritoTotal()
+            carritoTotal();
         }
-    })
+    });
 }
 
-function addLocalStorage(){
-    localStorage.setItem('carrito', JSON.stringify(carrito))
+function addLocalStorage() {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
-window.onload = function(){
+window.onload = function () {
     const storage = JSON.parse(localStorage.getItem('carrito'));
-    if(storage){
+    if (storage) {
         carrito = storage;
-        renderCarrito()
+        renderCarrito();
+    } else {
+        // Si no hay datos en el LocalStorage, cargamos los datos del archivo JSON
+        carrito = productosJSON;
+        renderCarrito();
     }
-}
+};

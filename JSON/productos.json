@@ -1,0 +1,80 @@
+[
+    {
+        "title": "Pikachu",
+        "precio": "$ 5.000",
+        "img": "./img/pikachu.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Jigglypuff",
+        "precio": "$ 5.000",
+        "img": "./img/p2.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Charizard",
+        "precio": "$ 5.000",
+        "img": "./img/p3.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Dragonite",
+        "precio": "$ 5.000",
+        "img": "./img/p4.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Bulbasaur",
+        "precio": "$ 5.000",
+        "img": "./img/p5.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Machamp",
+        "precio": "$ 5.000",
+        "img": "./img/p6.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Gengar",
+        "precio": "$ 5.000",
+        "img": "./img/p7.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Syther",
+        "precio": "$ 5.000",
+        "img": "./img/p8.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Suicune",
+        "precio": "$ 5.000",
+        "img": "./img/p9.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Zapdos",
+        "precio": "$ 5.000",
+        "img": "./img/p10.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Mew",
+        "precio": "$ 5.000",
+        "img": "./img/p11.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Gyarados",
+        "precio": "$ 5.000",
+        "img": "./img/p12.jpg",
+        "cantidad": 1
+    },
+    {
+        "title": "Gyarados Red",
+        "precio": "$ 5.000",
+        "img": "./img/p13.jpg",
+        "cantidad": 1
+    }
+]
